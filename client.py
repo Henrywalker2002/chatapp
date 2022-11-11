@@ -49,7 +49,8 @@ def init():
     while True:
         conn, addr = server.accept()
         print("Connection from: " + str(addr) + '\n')
-        accept_connection(conn, addr)
+        client_conn = Thread(target=accept_connection, args=(conn, addr, ))
+        client_conn.start()
     
 def client_program(username):
     url = "http://127.0.0.1:5000/getIP"
